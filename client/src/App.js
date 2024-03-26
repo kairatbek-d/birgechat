@@ -29,7 +29,7 @@ function App() {
     useEffect(() => {
         dispatch(refreshToken())
 
-        const socket = io('http://10.0.0.179:5000');
+        const socket = io('http://localhost:5000');
         dispatch(setSocket(socket)); // Store the socket instance in Redux
 
         return () => {

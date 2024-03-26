@@ -10,7 +10,7 @@ import { MESS_TYPES, getConversations } from '../../redux/actions/messageAction'
 const LeftSide = () => {
     const auth = useSelector(state => state.auth)
     const message = useSelector(state => state.message)
-    // const online = useSelector(state => state.online)
+    const online = useSelector(state => state.online)
     const dispatch = useDispatch()
 
     const [search, setSearch] = useState('')
@@ -41,7 +41,7 @@ const LeftSide = () => {
         setSearch('')
         setSearchUsers([])
         dispatch({type: MESS_TYPES.ADD_USER, payload: {...user, text: '', media: []}})
-        // dispatch({type: MESS_TYPES.CHECK_ONLINE_OFFLINE, payload: online})
+        dispatch({type: MESS_TYPES.CHECK_ONLINE_OFFLINE, payload: online})
         
         navigate(`/message/${user._id}`);
     }
@@ -79,9 +79,9 @@ const LeftSide = () => {
     // Check User Online - Offline
     useEffect(() => {
         if(message.firstLoad) {
-            // dispatch({type: MESS_TYPES.CHECK_ONLINE_OFFLINE, payload: online})
+            dispatch({type: MESS_TYPES.CHECK_ONLINE_OFFLINE, payload: online})
         }
-    },[message.firstLoad, dispatch])
+    },[online, message.firstLoad, dispatch])
 
     return (
         <>
