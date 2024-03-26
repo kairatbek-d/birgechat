@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 const SocketServer = require('./socketServer')
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // or your specific origin
+    origin: ['http://10.0.0.179:3000', 'http://localhost:3000'], // or your specific origin
     credentials: true, // to allow cookies and authentication headers
     // you can add more options as needed
 };
@@ -21,7 +21,7 @@ app.options('*', cors(corsOptions)); // include before other routes
 const http = require('http').createServer(app)
 const io = require('socket.io')(http, {
     cors: {
-        origin: "http://localhost:3000", // Allow frontend origin
+        origin: ["http://10.0.0.179:3000", 'http://localhost:3000'], // Allow frontend origin
         methods: ["GET", "POST"],
         credentials: true
     }
@@ -37,6 +37,7 @@ app.use('/api', require('./routes/userRouter'))
 app.use('/api', require('./routes/postRouter'))
 app.use('/api', require('./routes/commentRouter'))
 app.use('/api', require('./routes/notifyRouter'))
+app.use('/api', require('./routes/messageRouter'))
 
 const URI = process.env.MONGODB_URL
 mongoose.connect(URI).then(() => console.log('MongoDB Connected'))

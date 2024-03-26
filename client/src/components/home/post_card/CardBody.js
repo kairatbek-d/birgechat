@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import Carousel from '../../Carousel'
-import { useSelector } from 'react-redux'
 
-const CardBody = ({post}) => {
-    const theme = useSelector(state => state.theme)
-
+const CardBody = ({post, theme}) => {
     const [readMore, setReadMore] = useState(false)
 
     return (
